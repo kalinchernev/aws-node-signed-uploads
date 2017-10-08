@@ -62,7 +62,7 @@ describe(`Service aws-node-singned-uploads: S3 mock for successful operations`, 
   });
 });
 
-describe(`Service aws-node-singned-uploads: S3 mock for successful operations`, () => {
+describe(`Service aws-node-singned-uploads: S3 mock for failed operations`, () => {
   beforeAll(() => {
     AWS.mock('S3', 'getSignedUrl', (method, _, callback) => {
       callback(`S3 failed`);
@@ -76,32 +76,6 @@ describe(`Service aws-node-singned-uploads: S3 mock for successful operations`, 
 
   afterAll(() => {
     AWS.restore('S3');
-  });
-
-  test(`Require environment variables`, () => {
-    const event = {};
-    const context = {};
-
-    const result = handler(event, context);
-    result
-      .then(data => {
-        expect(data).toBeFalsy();
-      })
-      .catch(e => {
-        expect(e).toBe(`BUCKET and REGION are required environment variables`);
-      });
-  });
-
-  test(`Require a header "x-amz-meta-key"`, () => {
-    process.env.BUCKET = 'foo';
-    process.env.REGION = 'bar';
-    const event = {};
-    const context = {};
-
-    const result = handler(event, context);
-    result.then(data => {
-      expect(data).toMatchSnapshot();
-    });
   });
 
   test(`Replies back with a JSON for a signed upload on success`, () => {
