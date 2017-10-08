@@ -1,8 +1,17 @@
 # AWS Node Signed Uploads
 
+[![codecov](https://codecov.io/gh/kalinchernev/aws-node-signed-uploads/branch/master/graph/badge.svg)](https://codecov.io/gh/kalinchernev/aws-node-signed-uploads)
+
 Use this approach when you want or have to use [Amazon API Gateway](https://aws.amazon.com/api-gateway/) and you want to solve the 10MB payload limit.
 
 The service is based on the [serverless](https://serverless.com/) framework and solves a simple problem - uploading objects to a specific S3 bucket using [pre-signed URL](http://docs.aws.amazon.com/AmazonS3/latest/dev/PresignedUrlUploadObject.html)s. Implemented in node.js runtime using [getSignedUrl](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#getSignedUrl-property) method.
+
+## Requirements
+
+- Node.js >= 6.9.1
+- npm >= 3.10.8
+
+The package is targeting the latest possible 6.x of AWS Lambda.
 
 ## Security
 
