@@ -1,6 +1,7 @@
 # AWS Node Signed Uploads
 
 [![codecov](https://codecov.io/gh/kalinchernev/aws-node-signed-uploads/branch/master/graph/badge.svg)](https://codecov.io/gh/kalinchernev/aws-node-signed-uploads)
+[![Build Status](https://travis-ci.org/kalinchernev/aws-node-signed-uploads.svg?branch=master)](https://travis-ci.org/kalinchernev/aws-node-signed-uploads)
 
 Use this approach when you want or have to use [Amazon API Gateway](https://aws.amazon.com/api-gateway/) and you want to solve the 10MB payload limit.
 
