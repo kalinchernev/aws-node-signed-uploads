@@ -1,11 +1,14 @@
 import AWS from 'aws-sdk'; // eslint-disable-line import/no-extraneous-dependencies
+import checker from './lib/envVarsChecker';
 
 export const handler = (event, context, callback) => {
   const bucket = process.env.BUCKET;
   const region = process.env.REGION;
 
-  if (!bucket || !region) {
-    callback(`BUCKET and REGION are required environment variables`);
+  const missing = checker(process.env);
+  if (missing.length) {
+    const vars = missing.join(', ');
+    callback(`Missing required environment variables: ${vars}`);
   }
 
   const S3 = new AWS.S3({ signatureVersion: 'v4', region });

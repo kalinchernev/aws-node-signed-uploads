@@ -33,7 +33,9 @@ describe(`Service aws-node-singned-uploads: S3 mock for successful operations`, 
         expect(data).toBeFalsy();
       })
       .catch(e => {
-        expect(e).toBe(`BUCKET and REGION are required environment variables`);
+        expect(e).toBe(
+          `Missing required environment variables: BUCKET, REGION`
+        );
       });
   });
 
@@ -78,15 +80,19 @@ describe(`Service aws-node-singned-uploads: S3 mock for failed operations`, () =
     AWS.restore('S3');
   });
 
-  test(`Replies back with a JSON for a signed upload on success`, () => {
+  test(`Correctly handles error messages from S3`, () => {
     process.env.BUCKET = 'foo';
     process.env.REGION = 'bar';
     const event = eventStub;
     const context = {};
 
     const result = handler(event, context);
-    result.then(data => {
-      expect(data).toMatchSnapshot();
-    });
+    result
+      .then(data => {
+        expect(data).toBeFalsy();
+      })
+      .catch(e => {
+        expect(e).toBe(`S3 failed`);
+      });
   });
 });

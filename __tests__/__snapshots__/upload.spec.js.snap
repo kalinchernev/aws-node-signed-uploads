@@ -17,10 +17,3 @@ Object {
   "statusCode": 400,
 }
 `;
-
-exports[`Service aws-node-singned-uploads: S3 mock for successful operations Require a header "x-amz-meta-key" 2`] = `
-Object {
-  "body": "{\\"message\\":\\"Missing x-amz-meta-key header\\"}",
-  "statusCode": 400,
-}
-`;
