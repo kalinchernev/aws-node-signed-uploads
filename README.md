@@ -3,16 +3,18 @@
 [![codecov](https://codecov.io/gh/kalinchernev/aws-node-signed-uploads/branch/master/graph/badge.svg)](https://codecov.io/gh/kalinchernev/aws-node-signed-uploads)
 [![Build Status](https://travis-ci.org/kalinchernev/aws-node-signed-uploads.svg?branch=master)](https://travis-ci.org/kalinchernev/aws-node-signed-uploads)
 
-Use this approach when you want or have to use [Amazon API Gateway](https://aws.amazon.com/api-gateway/) and you want to solve the 10MB payload limit.
+If you have landed to this project out of curiosity for the technologies behind the service, you can see implementation details in [this article](https://kalinchernev.github.io/tdd-serverless-jest).
 
-The service is based on the [serverless](https://serverless.com/) framework and solves a simple problem - uploading objects to a specific S3 bucket using [pre-signed URL](http://docs.aws.amazon.com/AmazonS3/latest/dev/PresignedUrlUploadObject.html)s. Implemented in node.js runtime using [getSignedUrl](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#getSignedUrl-property) method.
+The approach implemented in this service is useful when you want to use [Amazon API Gateway](https://aws.amazon.com/api-gateway/) and you want to solve the 10MB payload limit.
+
+The service is based on the [serverless](https://serverless.com/) framework. The service is uploading objects to a specific S3 bucket using a [pre-signed URL](http://docs.aws.amazon.com/AmazonS3/latest/dev/PresignedUrlUploadObject.html). Implemented in node.js runtime using [getSignedUrl](http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#getSignedUrl-property) method.
 
 ## Requirements
 
 * Node.js >= 6.9.1
 * npm >= 3.10.8
 
-The package is targeting the latest possible 6.x of AWS Lambda.
+The package is targeting the latest runtime of AWS Lambda. ([8.10](https://aws.amazon.com/blogs/compute/node-js-8-10-runtime-now-available-in-aws-lambda/))
 
 ## Security
 

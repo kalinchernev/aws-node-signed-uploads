@@ -6,12 +6,12 @@ module.exports = {
   target: 'node',
   externals: [{ 'aws-sdk': true }],
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
-        loaders: ['babel-loader'],
         include: __dirname,
         exclude: /node_modules/,
+        use: [{ loader: 'babel-loader' }],
       },
     ],
   },

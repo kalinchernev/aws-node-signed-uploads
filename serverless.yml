@@ -5,13 +5,17 @@ plugins:
   - serverless-offline #serverless-offline needs to be last in the list
 
 custom:
-  webpackIncludeModules: true
+  webpack:
+    webpackConfig: 'webpack.config.js'
+    includeModules: true
+    packager: 'yarn'
+    # packExternalModulesMaxBuffer: 200 * 1024
   serverless-offline:
     port: 4000
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs8.10
   stage: ${opt:stage, file(config.json):stage, 'dev'}
   region: ${opt:region, file(config.json):region, 'eu-central-1'}
   environment:
