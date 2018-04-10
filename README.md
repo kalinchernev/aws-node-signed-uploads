@@ -9,8 +9,8 @@ The service is based on the [serverless](https://serverless.com/) framework and 
 
 ## Requirements
 
-- Node.js >= 6.9.1
-- npm >= 3.10.8
+* Node.js >= 6.9.1
+* npm >= 3.10.8
 
 The package is targeting the latest possible 6.x of AWS Lambda.
 
@@ -38,8 +38,8 @@ To use the deployed service in real life, you'll have to [set a `x-api-key` head
 
 Here's a short list of possible integrations I found making a quick Google search:
 
-- [Using pre-signed URLs to upload a file to a private S3 bucket](https://sanderknape.com/2017/08/using-pre-signed-urls-upload-file-private-s3-bucket/)
-- [react-s3-uploader](https://www.npmjs.com/package/react-s3-uploader)
+* [Using pre-signed URLs to upload a file to a private S3 bucket](https://sanderknape.com/2017/08/using-pre-signed-urls-upload-file-private-s3-bucket/)
+* [react-s3-uploader](https://www.npmjs.com/package/react-s3-uploader)
 
 ## How to use
 
@@ -56,7 +56,7 @@ $ yarn test
 Developing tests:
 
 ```bash
-$ ./node_modules/.bin/jest --watch
+$ npx jest --watch
 ```
 
 ### Develop locally

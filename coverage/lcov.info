@@ -1,5 +1,5 @@
 TN:
-SF:/home/kalin/projects/apps/aws-node-signed-uploads/src/upload.js
+SF:/Users/kalin/projects/aws-node-signed-uploads/src/upload.js
 FN:4,(anonymous_0)
 FN:39,(anonymous_1)
 FNF:2
@@ -40,7 +40,7 @@ BRF:10
 BRH:10
 end_of_record
 TN:
-SF:/home/kalin/projects/apps/aws-node-signed-uploads/src/lib/envVarsChecker.js
+SF:/Users/kalin/projects/aws-node-signed-uploads/src/lib/envVarsChecker.js
 FN:1,(anonymous_0)
 FN:5,(anonymous_1)
 FNF:2
