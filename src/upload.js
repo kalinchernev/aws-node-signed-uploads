@@ -1,11 +1,12 @@
 import AWS from 'aws-sdk'; // eslint-disable-line import/no-extraneous-dependencies
 import checker from './lib/envVarsChecker';
 
-export const handler = (event, context, callback) => {
+export const handler = async (event, context, callback) => {
   const bucket = process.env.BUCKET;
   const region = process.env.REGION;
 
   const missing = checker(process.env);
+
   if (missing.length) {
     const vars = missing.join(', ');
     callback(`Missing required environment variables: ${vars}`);
@@ -29,17 +30,14 @@ export const handler = (event, context, callback) => {
     callback(null, response);
   }
 
-  // If producer has correctly submitted a key.
   const params = {
     Bucket: bucket,
     Key: file,
     Expires: 30,
   };
 
-  S3.getSignedUrl('putObject', params, (err, url) => {
-    if (err) {
-      callback(err);
-    }
+  try {
+    const url = await S3.getSignedUrl('putObject', params);
 
     const response = {
       statusCode: 200,
@@ -51,7 +49,14 @@ export const handler = (event, context, callback) => {
     };
 
     callback(null, response);
-  });
+  } catch (error) {
+    const response = {
+      statusCode: 400,
+      body: JSON.stringify(error),
+    };
+
+    callback(response);
+  }
 };
 
 export default handler;

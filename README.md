@@ -84,9 +84,3 @@ Run the following the fire the deployment:
 ```bash
 $ yarn deploy
 ```
-
-Don't forget to go the to AWS Console for API Gateway and configure usage plans and API keys.
-
-## Known tricky parts
-
-The S3 method is a callback style in a project with promises because [S3 Get Signed URL accepts callback but not promise](https://github.com/aws/aws-sdk-js/issues/1008).
