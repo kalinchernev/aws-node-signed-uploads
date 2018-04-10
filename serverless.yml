@@ -38,5 +38,4 @@ functions:
       - http:
           path: upload
           method: put
-          private: true
           cors: true

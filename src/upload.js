@@ -14,15 +14,15 @@ export const handler = (event, context, callback) => {
   const S3 = new AWS.S3({ signatureVersion: 'v4', region });
 
   const file =
-    event.headers && event.headers['x-amz-meta-key']
-      ? event.headers['x-amz-meta-key']
+    event.headers && event.headers['x-amz-meta-filekey']
+      ? event.headers['x-amz-meta-filekey']
       : undefined;
 
   if (!file) {
     const response = {
       statusCode: 400,
       body: JSON.stringify({
-        message: `Missing x-amz-meta-key header`,
+        message: `Missing x-amz-meta-filekey in the header of the request.`,
       }),
     };
 
