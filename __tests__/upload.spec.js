@@ -27,16 +27,9 @@ describe(`Service aws-node-singned-uploads: S3 mock for successful operations`, 
     const event = {};
     const context = {};
 
-    const result = handler(event, context);
-    result
-      .then(data => {
-        expect(data).toBeFalsy();
-      })
-      .catch(e => {
-        expect(e).toBe(
-          `Missing required environment variables: BUCKET, REGION`
-        );
-      });
+    expect(handler(event, context)).rejects.toThrow(
+      `Missing required environment variables: BUCKET, REGION`
+    );
   });
 
   test(`Require a header "x-amz-meta-key"`, () => {
@@ -46,9 +39,7 @@ describe(`Service aws-node-singned-uploads: S3 mock for successful operations`, 
     const context = {};
 
     const result = handler(event, context);
-    result.then(data => {
-      expect(data).toMatchSnapshot();
-    });
+    result.then(data => expect(data).toMatchSnapshot());
   });
 
   test(`Replies back with a JSON for a signed upload on success`, () => {
@@ -58,9 +49,7 @@ describe(`Service aws-node-singned-uploads: S3 mock for successful operations`, 
     const context = {};
 
     const result = handler(event, context);
-    result.then(data => {
-      expect(data).toMatchSnapshot();
-    });
+    result.then(data => expect(data).toMatchSnapshot());
   });
 });
 
@@ -87,12 +76,6 @@ describe(`Service aws-node-singned-uploads: S3 mock for failed operations`, () =
     const context = {};
 
     const result = handler(event, context);
-    result
-      .then(data => {
-        expect(data).toBeFalsy();
-      })
-      .catch(e => {
-        expect(e).toBe(`S3 failed`);
-      });
+    result.then(data => expect(data).toMatchSnapshot());
   });
 });
