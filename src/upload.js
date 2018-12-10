@@ -1,7 +1,7 @@
 import AWS from 'aws-sdk'; // eslint-disable-line import/no-extraneous-dependencies
 import checker from './lib/envVarsChecker';
 
-export const handler = async (event, context, callback) => {
+export const handler = async event => {
   const bucket = process.env.BUCKET;
   const region = process.env.REGION;
 
@@ -9,7 +9,7 @@ export const handler = async (event, context, callback) => {
 
   if (missing.length) {
     const vars = missing.join(', ');
-    callback(`Missing required environment variables: ${vars}`);
+    return `Missing required environment variables: ${vars}`;
   }
 
   const S3 = new AWS.S3({ signatureVersion: 'v4', region });
@@ -27,7 +27,7 @@ export const handler = async (event, context, callback) => {
       }),
     };
 
-    callback(null, response);
+    return response;
   }
 
   const params = {
@@ -48,14 +48,14 @@ export const handler = async (event, context, callback) => {
       body: JSON.stringify(url),
     };
 
-    callback(null, response);
+    return response;
   } catch (error) {
     const response = {
       statusCode: 400,
       body: JSON.stringify(error),
     };
 
-    callback(response);
+    return response;
   }
 };
 

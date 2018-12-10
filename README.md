@@ -5,10 +5,10 @@
 
 ## Requirements
 
-* Node.js >= 6.9.1
-* npm >= 3.10.8
+* Node.js (version 8 is best at the moment)
+* npm which comes with Node.js
 
-## Welcome
+## Introduction
 
 If you have landed to this project out of curiosity for the technologies behind the service, you can see implementation details in [this article](https://kalinchernev.github.io/tdd-serverless-jest).
 
@@ -18,21 +18,46 @@ The service is based on the [serverless](https://serverless.com/) framework. The
 
 The package is targeting the latest runtime of AWS Lambda. ([8.10](https://aws.amazon.com/blogs/compute/node-js-8-10-runtime-now-available-in-aws-lambda/))
 
-### Prerequisites
+## Settings
 
-1.  Create `config.json`
+If you prefer to use a different region or stage, change these:
 
-Example is provided in `config.example.json`.
+```sh
+$ export AWS_STAGE=
+$ export AWS_REGION=
+```
 
-2.  Create a bucket for the file uploads
+Defaults are `dev` and `eu-central-1`.
 
-The name of the folder should be matching `bananabucket-${self:provider.stage}`, where `${self:provider.stage}` is dynamically calculated based on the settings of `config.json`.
+Change name of upload bucket:
 
-Of course you can also change the name of environment variable completely from `BUCKET: bananabucket-${self:provider.stage}`, but where's the fun of not having a `bananabucket`?
+```yaml
+bucketName: testBucket
+```
 
 ### File name to sign
 
 The file you want to upload is signed via `x-amz-meta-filekey` header.
+
+### How to use
+
+Get dependencies with `yarn` or `npm install`. The following examples will assume the usage of `yarn`.
+
+Issue a `GET` request to get the signed URL:
+
+```sh
+curl --request GET \
+  --url https://{serviceID}.execute-api.{region}.amazonaws.com/dev/upload \
+  --header 'x-amz-meta-filekey: the-road-to-graphql.pdf'
+```
+
+If your bucket is called `foo`, and you upload `the-road-to-graphql`, after receiving the signed URL, issue a `PUT` request with the information you have signed:
+
+```sh
+curl --request PUT \
+  --url 'https://foo.s3.eu-central-1.amazonaws.com/the-road-to-graphql.pdf?X-Amz-SignedHeaders=host&X-Amz-Signature=the-signature&X-Amz-Security-Token=the-token&X-Amz-Expires=30&X-Amz-Date=20181210T113015Z&X-Amz-Credential=something10%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Algorithm=AWS4-HMAC-SHA256' \
+  --data 'somemething-awesome'
+```
 
 ### Integrations
 
@@ -40,10 +65,6 @@ Here's a short list of possible integrations I found making a quick Google searc
 
 * [Using pre-signed URLs to upload a file to a private S3 bucket](https://sanderknape.com/2017/08/using-pre-signed-urls-upload-file-private-s3-bucket/)
 * [react-s3-uploader](https://www.npmjs.com/package/react-s3-uploader)
-
-### How to use
-
-Get dependencies with `yarn` or `npm install`. The following examples will assume the usage of `yarn`.
 
 ### Tests
 
