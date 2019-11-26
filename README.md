@@ -5,7 +5,7 @@
 
 ## Requirements
 
-* Node.js (version 8 is best at the moment)
+* Node.js (`nvm use` to use `carbon` suggested by project's `.nvmrc`)
 * npm which comes with Node.js
 
 ## Introduction
